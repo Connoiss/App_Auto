@@ -8,7 +8,8 @@ desired_caps = {
     'deviceName': 'deviceName',  # 使用的移动设备或模拟器的种类
     'platformVersion': '9',  # 移动操作系统版本
     'appPackage': 'com.tencent.mobileqq',  # apk包名com.tencent.mobileqq
-    'appActivity': '.activity.SplashActivity',  # apk的launcherActivity .activity.SplashActivity
+    # apk的launcherActivity .activity.SplashActivity
+    'appActivity': '.activity.SplashActivity',
     'unicodeKeyboard': True,  # 使用unicodeKeyboard的编码方式来发送字符串，避免中文报错
     'noReset': True,
 }
