@@ -1,6 +1,6 @@
 import os
 
-
+os.startfile(r'P:\Games\Genshin Impact\Genshin Impact Game\YuanShen.exe')
 def open_app(app_dir):
     os.startfile(app_dir)
 

@@ -14,46 +14,64 @@
    <string>模式选择</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0" colspan="2">
-    <widget class="QComboBox" name="Modes">
-     <property name="editable">
-      <bool>false</bool>
-     </property>
-     <property name="currentText">
-      <string/>
-     </property>
-     <property name="placeholderText">
-      <string>请选择模式</string>
-     </property>
-     <property name="duplicatesEnabled">
-      <bool>false</bool>
-     </property>
-     <property name="modelColumn">
-      <number>8</number>
+   <item row="1" column="0">
+    <widget class="QLabel" name="Recommend">
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:700;&quot;&gt;推荐模式：&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="0" colspan="2">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Ok</set>
-     </property>
-     <property name="centerButtons">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
+   <item row="1" column="1">
     <widget class="QLabel" name="RecommendedMode">
      <property name="text">
       <string>SomeMode</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="Recommend">
+   <item row="0" column="0" colspan="2">
+    <widget class="QComboBox" name="Select">
+     <property name="placeholderText">
+      <string>请选择模式</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>二键模式</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>四键模式</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>六键模式</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>八键模式</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>九键模式</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>舞立方</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <widget class="QPushButton" name="ok">
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:700;&quot;&gt;推荐模式：&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>确定</string>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
      </property>
     </widget>
    </item>
