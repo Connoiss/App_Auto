@@ -60,12 +60,12 @@ class Ui_ModeSelection(QWidget):
         self.is_mode = mode_mapping.get(selected_text, 0)
         # 在界面上显示推荐模式
         print(self.is_mode)
-        favor_mode = self.check_data_existence('favor_mode', Ui_Login.current_user)
-        recommended_mode = favor_mode[3] if favor_mode[3] else "无"
-        self.RecommendedMode.setText(recommended_mode)
+        # favor_mode = self.check_data_existence('favor_mode', Ui_Login.current_user)
+        # recommended_mode = favor_mode[3] if favor_mode[3] else "无"
+        # self.RecommendedMode.setText(recommended_mode)
         self.ok.clicked.connect(self.OK_clicked)
 
-    def OK_clicked(self):
+    def OK_clicked(self):  # 根据选择的模式进行切换软件和喜好模式计数
         global serial_port
         print("is_mode:", self.is_mode)
         if self.is_mode == 55:  # 2k
@@ -108,8 +108,8 @@ class Ui_ModeSelection(QWidget):
             print(a)
         except Exception as e:
             print(f"串口连接和发送失败: {e}")
-        finally:
-            serial_port.close()
+        # finally:
+        # serial_port.close()
 
     def generate(self, mode):  # 排序得出推荐模式
         max_key = max(range(len(mode)), key=lambda i: mode[i])
@@ -120,7 +120,7 @@ class Ui_ModeSelection(QWidget):
         return key_names[max_key]
 
     def check_data_existence(self, column, value):
-        global connection, cursor
+        # global connection, cursor
         try:
             # 连接到 MySQL 数据库
             connection = pymysql.connect(
@@ -167,10 +167,10 @@ class Ui_ModeSelection(QWidget):
         # 关闭数据库连接
         db.close()
 
-    def update_mode_list(self):
+    def update_mode_list(self):  # 更新喜好模式
         # 从数据库获取存储的字符串
         favor_mode = self.check_data_existence('favor_mode', Ui_Login.current_user)
-        if favor_mode[3]:
+        if favor_mode:
             mode_str = favor_mode[3]
             # 将字符串解析为列表
             self.mode_list = [int(char) for char in mode_str]
@@ -186,7 +186,7 @@ class Ui_ModeSelection(QWidget):
     def end_program(self, pro_name):
         os.system('%s%s' % ("taskkill /F /IM ", pro_name))
 
-    def handleCalc_Malody(self):
+    def handleCalc_Malody(self):  # 启动Malody
         Application("uia").start(r"D:\leidian\LDPlayer9\dnplayer.exe")
         desired_caps = {
             "platformName": "Android",
@@ -200,7 +200,7 @@ class Ui_ModeSelection(QWidget):
         }
         driver = app_web.Remote('http://127.0.0.1:4723/wd/hub', desired_caps)
 
-    def handleCalc_Maipaid(self):
+    def handleCalc_Maipaid(self):  # 启动Maipaid
         Application("uia").start(r"D:\leidian\LDPlayer9\dnplayer.exe")
         desired_caps = {
             "platformName": "Android",
@@ -214,10 +214,10 @@ class Ui_ModeSelection(QWidget):
         }
         driver = app_web.Remote('http://127.0.0.1:4723/wd/hub', desired_caps)
 
-    def handleCalc_MushDash(self):
+    def handleCalc_MushDash(self):  # 启动喵斯
         os.startfile(r'P:\SteamLibrary\steamapps\common\Muse Dash\MuseDash.exe')
 
-    # activity
+    # UI settings
     def setupUi(self, ModeSelection):
         if not ModeSelection.objectName():
             ModeSelection.setObjectName(u"ModeSelection")

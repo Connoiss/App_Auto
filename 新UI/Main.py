@@ -18,27 +18,27 @@ from PySide6.QtWidgets import (QApplication, QGridLayout, QLabel, QPushButton, Q
                                QWidget)
 
 
-class Ui_Connecting(QWidget):
+class Ui_Connecting(QWidget):  # 连接中界面
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         if uartorigin.auto_open_serial():
-            QTimer.singleShot(1000, self.openWelcome)
-            self.handleCalc_Appium()
+            QTimer.singleShot(1000, self.openWelcome)  # 等1000ms后打开欢迎界面
+            self.handleCalc_Appium()  # 打开Appium，不然模拟器用不了脚本
         else:
             QTimer.singleShot(3500, self.openConnnectFailed)
 
-    def openWelcome(self):
+    def openWelcome(self):  # 打开欢迎界面
         self.close()
         self.Welcome = Ui_Main()
         self.Welcome.show()
 
-    def openConnnectFailed(self):
+    def openConnnectFailed(self):  # 打开连接失败界面
         self.close()
         self.ConnectFailed = Ui_Form()
         self.ConnectFailed.show()
 
-    def handleCalc_Appium(self):
+    def handleCalc_Appium(self):  # 打开Appium和点击连接服务器
         app = Application("uia").start(r"C:\Users\22203\AppData\Local\Programs\Appium\Appium.exe")
         dlg = app["Appium"]
         dlg.wait(wait_for="ready", timeout=60, retry_interval=1)
@@ -73,7 +73,7 @@ class Ui_Form(QWidget):
         self.setupUi(self)
         self.activity()
 
-    def back(self):
+    def back(self):  # 返回到连接界面
         self.close()
         self.back = Ui_Connecting()
         self.back.show()
@@ -118,16 +118,19 @@ class Ui_Main(QWidget):
         self.setupUi(self)
         self.handleButton()
         self.setWindowFlags(Qt.WindowStaysOnTopHint)
-    def openRegisterWin(self):
+
+    def openRegisterWin(self):  # 打开注册界面
         # os.system("register.exe")
+        self.close()
         subprocess.call("register.exe", shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                         stderr=subprocess.PIPE)
 
-    def openLoginWin(self):
+    def openLoginWin(self):  # 打开登录界面
         # os.system("login.exe")
+        self.close()
         subprocess.call("login.exe", shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-    def handleButton(self):
+    def handleButton(self):  # 信号，槽连接
         self.ButtonLogin.clicked.connect(self.openLoginWin)
         self.ButtonSignup.clicked.connect(self.openRegisterWin)
 

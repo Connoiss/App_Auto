@@ -34,26 +34,26 @@ class Ui_SignUp(QtWidgets.QWidget):
     def getUsername(self):
         username_text = self.Username_SignUp.text()
 
-    def doRe(self):
+    def doRe(self):  # 注册函数
         # print(type(self.ID),self.ID)
         # print(self.ID,self.usrName,self.usrGender,self.contact,self.compa,self.career,self.fstpwd,self.pwdsecond)
         try:
             a = False
             # b = self.usrGender
             c = False
-            for i in self.Username_SignUp.text():
+            for i in self.Username_SignUp.text():  # 用户名限制
                 if 33 <= ord(i) <= 126:
                     continue
                 else:
                     a = True
-            for i in self.Password_Forsure.text():
+            for i in self.Password_Forsure.text():  # 密码限制
                 if 33 <= ord(i) <= 126:
                     continue
                 else:
                     c = True
             if a:
                 IDwrong = QMessageBox()
-                IDwrong.setWindowIcon("game.ico")
+                # IDwrong.setWindowIcon("game.ico")
                 IDwrong.setWindowTitle("ID格式错误!")
                 IDwrong.setText("ID只能由英文字母、数字和部分英文字符组成!")
                 IDwrong.exec()
@@ -67,7 +67,7 @@ class Ui_SignUp(QtWidgets.QWidget):
                 pw.setWindowTitle("密码错误!")
                 pw.setText("密码必须6~16位!")
                 pw.exec()
-            else:
+            else:  # 上传用户数据至数据库
                 db = pymysql.connect(host="localhost", user="root", password="123456", charset="utf8")
                 csor = db.cursor()
                 csor.execute("use remaimai")
@@ -108,19 +108,19 @@ class Ui_SignUp(QtWidgets.QWidget):
     def closeEvent(self, event):
         sys.exit(0)
 
-    def getName(self):
+    def getName(self):  # 获取用户名
         if isinstance(self.Username_SignUp, QLineEdit):
             return self.Username_SignUp.text()
 
-    def getFstpwd(self):
+    def getFstpwd(self):  # 获取密码
         if isinstance(self.Password_SignUp, QLineEdit):
             return self.Password_SignUp.text()
 
-    def getSecpwd(self):
+    def getSecpwd(self):  # 获取确认密码
         if isinstance(self.Password_Forsure, QLineEdit):
             return self.Password_Forsure.text()
 
-    def activities(self):
+    def activities(self):  # 信号，槽连接
         self.doRegister.clicked.connect(self.doRe)
         self.Username_SignUp.textChanged.connect(self.getName)
         self.Password_SignUp.textChanged.connect(self.getFstpwd)

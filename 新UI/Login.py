@@ -24,6 +24,7 @@ from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QLineEdit, QMe
 
 class Ui_Login(QtWidgets.QWidget):
     current_user = None  # 用于存储当前登录账号的类变量
+
     def __init__(self):
         super().__init__()
         self.current_user = None
@@ -36,26 +37,27 @@ class Ui_Login(QtWidgets.QWidget):
         password = self.getPwd()
         if self.check_data_existence('user_name', user_name):
             if self.check_data_existence('user_password', password):
-                self.current_user = user_name  # 设置当前登录账号
+                self.current_user = user_name  # 设置当前登录账号，传参给其他页面
                 self.openSelectWin()
             else:
                 QMessageBox.warning(self, '提示', '密码错误，请重新输入')
         else:
             self.ifintoregist()
         self.login.setText("登录")
-    def getID(self):
+
+    def getID(self):  # 获取用户名
         return self.lineEdit.text()
 
-    def getPwd(self):
+    def getPwd(self):  # 获取密码
         return self.lineEdit_2.text()
 
-    def openRegisterWin(self):
+    def openRegisterWin(self):  # 打开注册界面
         subprocess.call("register1.exe", shell=True)
 
-    def openSelectWin(self):
+    def openSelectWin(self):  # 打开模式选择界面
         subprocess.call("Modeselect.exe", shell=True)
 
-    def check_data_existence(self, column, value):
+    def check_data_existence(self, column, value):  # 检查数据是否在数据库
         global connection, cursor
         try:
             # 连接到 MySQL 数据库
@@ -91,7 +93,7 @@ class Ui_Login(QtWidgets.QWidget):
                 cursor.close()
                 connection.close()
 
-    def ifintoregist(self):
+    def ifintoregist(self):  # 是否进入注册界面函数
         msgBox = QMessageBox()
         msgBox.setWindowTitle('提示')
         msgBox.setText('用户名不存在，是否注册账号？ ')
@@ -104,7 +106,7 @@ class Ui_Login(QtWidgets.QWidget):
         msgBox.setDefaultButton(QMessageBox.Yes)
         msgBox.exec()
 
-    def handleButton(self):
+    def handleButton(self):  # 信号，槽连接
         self.login.clicked.connect(self.loginAction)
         self.lineEdit.textChanged.connect(self.getID)
         self.lineEdit_2.textChanged.connect(self.getPwd)
